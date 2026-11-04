@@ -11,9 +11,30 @@
       } catch {}
     </script>
     <title>R-AX Training</title>
-    <script type="module" crossorigin src="/pub_training/assets/index-CGjSGZ6q.js"></script>
-    <link rel="modulepreload" crossorigin href="/pub_training/assets/runtime-core.esm-bundler-_PXz1bcR.js">
-    <link rel="stylesheet" crossorigin href="/pub_training/assets/index-C1KBpdCh.css">
+    
+    
+    
+  <script>
+      (function () {
+        var routes = ["dic","prj","pub","std"]
+        var parts = location.pathname.split('/')
+        var root = location.pathname.slice(0, location.pathname.lastIndexOf('/') + 1)
+        for (var i = 1; i < parts.length; i += 1) {
+          if (routes.indexOf(parts[i]) > -1) {
+            root = parts.slice(0, i).join('/') + '/'
+            break
+          }
+        }
+        [{"tag":"script","attrs":{"type":"module","crossorigin":"","src":"./assets/index-Cm6OyzZD.js"}},{"tag":"link","attrs":{"rel":"modulepreload","crossorigin":"","href":"./assets/runtime-core.esm-bundler-_PXz1bcR.js"}},{"tag":"link","attrs":{"rel":"stylesheet","crossorigin":"","href":"./assets/index-CvFXUiY1.css"}}].forEach(function (asset) {
+          var el = document.createElement(asset.tag)
+          Object.keys(asset.attrs).forEach(function (key) {
+            var value = asset.attrs[key]
+            el.setAttribute(key, /^(src|href)$/.test(key) ? root + value.replace('./', '') : value)
+          })
+          document.head.appendChild(el)
+        })
+      })()
+    </script>
   </head>
   <body>
     <div id="app"></div>
