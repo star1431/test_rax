@@ -1,4 +1,4 @@
-import{A as e,C as t,L as n,P as r,Q as i,T as a,a as o,c as s,d as c,et as l,f as u,i as d,j as f,o as p,t as m,u as h,x as g}from"./runtime-core.esm-bundler-_PXz1bcR.js";import{o as _}from"./index-DRHU3eMB.js";import{t as v}from"./DemoCompare-C7skMkLc.js";var y=`.demo-accordion {
+import{A as e,C as t,L as n,P as r,Q as i,T as a,a as o,c as s,d as c,et as l,f as u,i as d,j as f,o as p,t as m,u as h,x as g}from"./runtime-core.esm-bundler-_PXz1bcR.js";import{o as _}from"./index-CGjSGZ6q.js";import{t as v}from"./DemoCompare-C7skMkLc.js";var y=`.demo-accordion {
   border: 1px solid #c9d4e3;
   border-radius: 6px;
   background: #fff;
