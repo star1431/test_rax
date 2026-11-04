@@ -1,4 +1,4 @@
-import{$ as e,A as t,C as n,L as r,P as i,T as a,a as o,c as s,d as c,et as l,f as u,i as d,j as f,o as p,t as m,u as h,x as g}from"./runtime-core.esm-bundler-_PXz1bcR.js";import{o as _}from"./index-PSRmlYcm.js";import{t as v}from"./DemoCompare-C7skMkLc.js";var y=`.demo-scroll-panel {
+import{$ as e,A as t,C as n,L as r,P as i,T as a,a as o,c as s,d as c,et as l,f as u,i as d,j as f,o as p,t as m,u as h,x as g}from"./runtime-core.esm-bundler-_PXz1bcR.js";import{o as _}from"./index-DhNIXVN4.js";import{t as v}from"./DemoCompare-C7skMkLc.js";var y=`.demo-scroll-panel {
   display: flex;
   flex-direction: column;
   height: 260px; /* 스크롤이 생기려면 컨테이너 높이가 정해져 있어야 합니다. */
