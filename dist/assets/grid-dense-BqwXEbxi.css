@@ -1,0 +1,1 @@
+.demo-dense-grid{grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-flow:dense;gap:6px;display:grid}.demo-dense-item{color:#25334a;background:#fff;border:1px solid #c9d4e3;border-radius:4px;min-height:44px;padding:6px;font-size:12px;font-weight:700}.demo-dense-item-wide{background:#eaf0ff;grid-column:span 2}.is-problem .demo-dense-grid{grid-auto-flow:row}

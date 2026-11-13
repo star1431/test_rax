@@ -1,0 +1,12 @@
+# 아파치 웹호스팅(가비아 등)용 설정: 빌드 결과(dist)와 함께 배포 폴더에 올라갑니다.
+# History 모드라 /{배포 폴더}/pub/css/flex-ellipsis 같은 주소를 직접 열거나 새로고침하면 서버에는 그 파일이 없습니다.
+# 실제 파일·폴더가 아닌 요청은 이 폴더의 index.html로 보내, 앱이 주소를 읽어 화면을 그리게 합니다.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^ index.html [L]
+</IfModule>
+
+# mod_rewrite를 쓸 수 없는 서버: 없는 주소에 404.html(앱과 같은 내용)을 보여 줍니다. 경로는 배포 폴더에 맞게 바꿉니다.
+# ErrorDocument 404 /pub/training/404.html
