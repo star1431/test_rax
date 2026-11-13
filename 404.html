@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="퍼블리싱 실무기법을 직접 비교하고 익히는 R-AX Training. 문제 상황, 실행 예제, 원인, 해결 코드, 짧은 실습." />
+    <!-- 파비콘: 헤더 로고(brand-mark)와 같은 모양. SVG를 지원하지 않는 브라우저는 PNG, iOS 홈 화면은 apple-touch-icon -->
+    
+    
+    
+    <script>
+      // 첫 렌더 전에 저장된 테마를 복원해 새로고침 시 깜빡임을 줄입니다.
+      try {
+        document.documentElement.dataset.theme = localStorage.getItem('publish-lab-theme') === 'dark' ? 'dark' : 'light'
+      } catch {}
+    </script>
+    <title>R-AX Training</title>
+    
+    
+    
+    
+  <script>
+        (function () {
+          var shapes = {"dic":{"depth":1},"prj":{"depth":2},"pub":{"depth":3,"sections":["css","scss","js","vue","react","recap"]},"search":{"depth":1},"std":{"depth":2},"vcs":{"depth":2}}
+          var assets = [{"tag":"link","attrs":{"rel":"icon","type":"image/svg+xml","href":"./assets/favicon-DuQUafwm.svg"}},{"tag":"link","attrs":{"rel":"icon","type":"image/png","sizes":"32x32","href":"./assets/favicon-32-BZvZKILJ.png"}},{"tag":"link","attrs":{"rel":"apple-touch-icon","href":"./assets/apple-touch-icon-CwTSSV6Z.png"}},{"tag":"script","attrs":{"type":"module","crossorigin":"","src":"./assets/index-Dxflp_jg.js"}},{"tag":"link","attrs":{"rel":"modulepreload","crossorigin":"","href":"./assets/rolldown-runtime-XKyaHtl9.js"}},{"tag":"link","attrs":{"rel":"modulepreload","crossorigin":"","href":"./assets/runtime-core.esm-bundler-ColWfbNJ.js"}},{"tag":"link","attrs":{"rel":"stylesheet","crossorigin":"","href":"./assets/index-C9PPEhJj.css"}}]
+          var path = location.pathname
+          var candidates = []
+          for (var end = path.lastIndexOf('/'); end > -1; end = path.lastIndexOf('/', end - 1)) {
+            candidates.push(path.slice(0, end + 1))
+            if (end === 0) break
+          }
+
+          // 후보 뒤의 나머지 주소가 홈('') 또는 실제 라우트 모양이면 그 후보가 배포 루트입니다.
+          function isRoute(rest) {
+            if (rest.length === 0) return true
+            var shape = shapes[rest[0]]
+            if (!shape || rest.length > shape.depth) return false
+            return rest.length < 3 || (shape.sections || []).indexOf(rest[1]) > -1
+          }
+
+          function load(root) {
+            assets.forEach(function (asset) {
+              var el = document.createElement(asset.tag)
+              Object.keys(asset.attrs).forEach(function (key) {
+                var value = asset.attrs[key]
+                el.setAttribute(key, /^(src|href)$/.test(key) ? root + value.replace('./', '') : value)
+              })
+              document.head.appendChild(el)
+            })
+          }
+
+          // 확인: 진입 스크립트가 그 폴더에 실제로 있는지 요청해 봅니다. 없는 주소에 index.html(HTML)을 돌려주는 서버도 있어
+          // 응답 형식(JavaScript)까지 확인합니다. 한 번 확인한 위치는 이 탭에 기억해(sessionStorage) 다시 요청하지 않습니다.
+          var entry = "assets/index-Dxflp_jg.js"
+          var key = 'rax-root:' + entry
+          var verified = {}
+          try { verified = JSON.parse(sessionStorage.getItem(key) || '{}') } catch (e) {}
+
+          function check(root, ok, fail) {
+            if (verified[root]) return ok()
+            fetch(root + entry, { method: 'HEAD' })
+              .then(function (response) {
+                var type = response.headers.get('content-type') || ''
+                if (!response.ok || type.indexOf('javascript') < 0) return fail()
+                verified[root] = 1
+                try { sessionStorage.setItem(key, JSON.stringify(verified)) } catch (e) {}
+                ok()
+              })
+              .catch(fail)
+          }
+
+          // 라우트 모양으로 고른 후보를 먼저 확인하고, 아니면(잘못된 주소, 배포 폴더 이름이 라우트와 같은 경우)
+          // 긴 후보부터 차례로 확인합니다. 모두 실패하면 고른 후보(없으면 현재 폴더)로 불러옵니다.
+          var matched = null
+          for (var i = 0; i < candidates.length; i += 1) {
+            if (isRoute(path.slice(candidates[i].length).split('/').filter(Boolean))) {
+              matched = candidates[i]
+              break
+            }
+          }
+
+          function probe(index) {
+            if (index >= candidates.length) return load(matched || candidates[0])
+            if (candidates[index] === matched) return probe(index + 1)
+            check(candidates[index], function () { load(candidates[index]) }, function () { probe(index + 1) })
+          }
+
+          if (matched) check(matched, function () { load(matched) }, function () { probe(0) })
+          else probe(0)
+        })()
+      </script>
+  </head>
+  <body>
+    <div id="app"></div>
+  </body>
+</html>
